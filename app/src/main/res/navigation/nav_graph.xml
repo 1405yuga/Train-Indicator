@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/displayStationsFragment">
+
+    <fragment
+        android:id="@+id/displayStationsFragment"
+        android:name="com.example.trainindicator.DisplayStationsFragment"
+        android:label="fragment_display_stations"
+        tools:layout="@layout/fragment_display_stations" />
+</navigation>
