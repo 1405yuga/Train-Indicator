@@ -25,7 +25,6 @@ import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 private const val TAG = "DisplayStationsFragment tag"
@@ -84,6 +83,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
             Log.d(TAG, "Has location permission")
 
             fusedLocationProviderClient.lastLocation.addOnSuccessListener {
+                Log.d(TAG, "fusedLocationProviderClient $it")
                 viewModel.setUserLocation(LatLng(it.latitude, it.longitude))
             }
                 .addOnFailureListener {
@@ -92,6 +92,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                         "Unable to fetch current location",
                         Toast.LENGTH_SHORT
                     ).show()
+                    Log.d(TAG, "Unable to fetch location ${it.message}")
                 }
 
         } else {
@@ -104,9 +105,16 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         val mMap = p0
 
         viewModel.userLocation.observe(viewLifecycleOwner, Observer {
-            mMap.addMarker(MarkerOptions().position(it).title("Me!"))
+
+            mMap.addMarker(
+                MarkerOptions().position(it).title("You are here!").icon(
+                    BitmapDescriptorFactory.fromBitmap(
+                        viewModel.createMarkerIcon(null, null, requireContext())!!
+                    )
+                )
+            )
             mMap.moveCamera(
-                CameraUpdateFactory.newLatLngZoom(it, 10.5f)
+                CameraUpdateFactory.newLatLngZoom(it, 12.0f)
             )
         })
 

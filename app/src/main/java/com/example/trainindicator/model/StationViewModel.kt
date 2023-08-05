@@ -20,7 +20,7 @@ class StationViewModel : ViewModel() {
     private val _userLocation = MutableLiveData<LatLng>()
     val userLocation: LiveData<LatLng> = _userLocation
 
-    fun setUserLocation(userLocation : LatLng){
+    fun setUserLocation(userLocation: LatLng) {
         this._userLocation.value = userLocation
     }
 
@@ -53,9 +53,21 @@ class StationViewModel : ViewModel() {
     fun createMarkerIcon(stationCode: String?, status: String?, context: Context): Bitmap? {
         val height = 150
         val width = 150
-        var image = R.drawable.red_marker
-        if (status == ProjectConstants.FAST) image = R.drawable.blue_marker
+        var image: Int
+        if (status == ProjectConstants.FAST) {
+            image = R.drawable.blue_marker
+        } else if (status == ProjectConstants.SLOW) {
+            image = R.drawable.red_marker
+        } else {
+            image = R.drawable.user_maker
+        }
         val bitmap = BitmapFactory.decodeResource(context.resources, image)
+        if (stationCode == null || status == null) return Bitmap.createScaledBitmap(
+            bitmap,
+            width,
+            height,
+            false
+        )
         val bitmapWithText =
             addText(Bitmap.createScaledBitmap(bitmap, width, height, false), stationCode.toString())
         return bitmapWithText
