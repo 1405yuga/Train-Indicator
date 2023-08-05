@@ -17,7 +17,6 @@ object FirestoreFunctions {
         firestore.collection(ProjectConstants.WESTERN_RAILWAY).get()
             .addOnSuccessListener {
                 updateStationList(it.documents)
-                Log.d(TAG,"Updated stations list")
             }
             .addOnFailureListener {
                 Toast.makeText(context,"Failed to get stations",Toast.LENGTH_SHORT).show()
