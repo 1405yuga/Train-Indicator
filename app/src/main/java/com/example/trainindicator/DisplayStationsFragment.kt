@@ -62,10 +62,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                             .title(station.name)
                             .icon(
                                 BitmapDescriptorFactory.fromBitmap(
-                                    viewModel.createMarkerIcon(
-                                        station.status,
-                                        requireContext()
-                                    )!!
+                                    viewModel.createMarkerIcon(doc.id,station.status,requireContext())!!
                                 )
                             )
                     )

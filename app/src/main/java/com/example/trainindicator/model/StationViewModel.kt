@@ -3,6 +3,10 @@ package com.example.trainindicator.model
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Typeface
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,12 +23,33 @@ class StationViewModel : ViewModel() {
         _stationsList.value = it
     }
 
-    fun createMarkerIcon(status: String?, context: Context): Bitmap? {
+    private fun addText(bitmap: Bitmap, stationCode: String): Bitmap {
+        val resultBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
+        val canvas = Canvas(resultBitmap)
+
+        val textPaint = Paint().apply {
+            color = Color.WHITE
+            textSize = 24f // Set your desired text size
+            typeface = Typeface.DEFAULT_BOLD
+        }
+
+        // Calculate the position to center the text
+        val textX = (resultBitmap.width - textPaint.measureText(stationCode)) / 2
+        val textY = resultBitmap.height / 2.5
+
+        canvas.drawText(stationCode, textX, textY.toFloat(), textPaint)
+
+        return resultBitmap
+    }
+
+    fun createMarkerIcon(stationCode: String?, status: String?, context: Context): Bitmap? {
         val height = 120
         val width = 80
         var image = R.drawable.marker_yellow
-        if(status == ProjectConstants.FAST) image = R.drawable.marker_green
+        if (status == ProjectConstants.FAST) image = R.drawable.marker_green
         val bitmap = BitmapFactory.decodeResource(context.resources, image)
-        return Bitmap.createScaledBitmap(bitmap, width, height, false)
+        val bitmapWithText =
+            addText(Bitmap.createScaledBitmap(bitmap, width, height, false), stationCode.toString())
+        return bitmapWithText
     }
 }
