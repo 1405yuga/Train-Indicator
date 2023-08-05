@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "635397433270",
+    "project_id": "scrap-the-wrecks",
+    "storage_bucket": "scrap-the-wrecks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635397433270:android:2467d4b0df3de2756f0317",
+        "android_client_info": {
+          "package_name": "com.example.trainindicator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635397433270-suo31v7315sf75fmk913cuqgl7hlsgo0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAule3YS4yA9ZYwnjPd9kJSpscAckwx2lM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635397433270-suo31v7315sf75fmk913cuqgl7hlsgo0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
