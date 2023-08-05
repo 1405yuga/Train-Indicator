@@ -4,4 +4,6 @@ object ProjectConstants {
     const val SLOW = "SLOW"
     const val FAST = "FAST"
     const val WESTERN_RAILWAY = "WR"
+
+    const val LOCATION_REQUEST_CODE = 100
 }
