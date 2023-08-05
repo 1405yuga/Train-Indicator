@@ -28,7 +28,7 @@ class StationViewModel : ViewModel() {
         val canvas = Canvas(resultBitmap)
 
         val textPaint = Paint().apply {
-            color = Color.WHITE
+            color = Color.BLACK
             textSize = 24f // Set your desired text size
             typeface = Typeface.DEFAULT_BOLD
         }
@@ -43,10 +43,10 @@ class StationViewModel : ViewModel() {
     }
 
     fun createMarkerIcon(stationCode: String?, status: String?, context: Context): Bitmap? {
-        val height = 120
-        val width = 80
-        var image = R.drawable.marker_yellow
-        if (status == ProjectConstants.FAST) image = R.drawable.marker_green
+        val height = 150
+        val width = 150
+        var image = R.drawable.red_marker
+        if (status == ProjectConstants.FAST) image = R.drawable.blue_marker
         val bitmap = BitmapFactory.decodeResource(context.resources, image)
         val bitmapWithText =
             addText(Bitmap.createScaledBitmap(bitmap, width, height, false), stationCode.toString())
