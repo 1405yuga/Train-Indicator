@@ -20,6 +20,10 @@ class StationViewModel : ViewModel() {
     private val _userLocation = MutableLiveData<LatLng>()
     val userLocation: LiveData<LatLng> = _userLocation
 
+    fun setUserLocation(userLocation : LatLng){
+        this._userLocation.value = userLocation
+    }
+
     private var _stationsList = MutableLiveData(listOf<DocumentSnapshot>())
     val stationsList: LiveData<List<DocumentSnapshot>> = _stationsList
 
