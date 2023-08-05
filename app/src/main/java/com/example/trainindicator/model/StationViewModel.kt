@@ -12,9 +12,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.trainindicator.R
 import com.example.trainindicator.constants.ProjectConstants
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.DocumentSnapshot
 
 class StationViewModel : ViewModel() {
+
+    private val _userLocation = MutableLiveData<LatLng>()
+    val userLocation: LiveData<LatLng> = _userLocation
 
     private var _stationsList = MutableLiveData(listOf<DocumentSnapshot>())
     val stationsList: LiveData<List<DocumentSnapshot>> = _stationsList
