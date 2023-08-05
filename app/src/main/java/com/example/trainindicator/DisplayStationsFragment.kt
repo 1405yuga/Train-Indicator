@@ -112,7 +112,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                         viewModel.createMarkerIcon(null, null, requireContext())!!
                     )
                 )
-            )
+            )?.showInfoWindow()
             mMap.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(it, 12.0f)
             )
