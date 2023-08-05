@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.trainindicator.constants.ProjectConstants
 import com.example.trainindicator.databinding.FragmentDisplayStationsBinding
 import com.example.trainindicator.firebase.FirestoreFunctions
 import com.example.trainindicator.model.Station
@@ -58,20 +57,18 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                         station.coordinates!!.latitude,
                         station.coordinates.longitude
                     )
-                    if(station.status == ProjectConstants.FAST){
-                        mMap.addMarker(
-                            MarkerOptions().position(position)
-                                .title(station.name)
-                                .icon(BitmapDescriptorFactory.defaultMarker(140F))
-                        )
-                    }
-                    else{
-                        mMap.addMarker(
-                            MarkerOptions().position(position)
-                                .title(station.name)
-                                .icon(BitmapDescriptorFactory.defaultMarker(50F))
-                        )
-                    }
+                    mMap.addMarker(
+                        MarkerOptions().position(position)
+                            .title(station.name)
+                            .icon(
+                                BitmapDescriptorFactory.fromBitmap(
+                                    viewModel.createMarkerIcon(
+                                        station.status,
+                                        requireContext()
+                                    )!!
+                                )
+                            )
+                    )
 
                     mMap.moveCamera(
                         CameraUpdateFactory.newLatLngZoom(position, 10.5f)
