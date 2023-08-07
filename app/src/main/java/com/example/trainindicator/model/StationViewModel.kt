@@ -24,6 +24,13 @@ class StationViewModel : ViewModel() {
         this._userLocation.value = userLocation
     }
 
+    private val _railwayType = MutableLiveData<String>()
+    val railwayType: LiveData<String> = _railwayType
+
+    fun setUserLocation(railwayType: String) {
+        this._railwayType.value = railwayType
+    }
+
     private var _stationsList = MutableLiveData(listOf<DocumentSnapshot>())
     val stationsList: LiveData<List<DocumentSnapshot>> = _stationsList
 
