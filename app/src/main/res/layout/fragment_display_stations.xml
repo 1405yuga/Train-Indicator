@@ -21,7 +21,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:menu="@menu/menu_railway_type"
-            app:title="@string/app_name" />
+            app:title="@string/app_name"
+            app:titleCentered="true"
+            app:subtitleCentered="true"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
