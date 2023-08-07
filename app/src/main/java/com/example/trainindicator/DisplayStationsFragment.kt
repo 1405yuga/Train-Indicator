@@ -74,6 +74,9 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                 else resources.getString(R.string.central_railway)
             FirestoreFunctions.getStations(requireContext(), it, viewModel.updateStationList)
         })
+        binding.topAppBar.setNavigationOnClickListener {
+            binding.drawerLayout.open()
+        }
 
         return binding.root
     }

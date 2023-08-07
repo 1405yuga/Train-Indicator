@@ -2,4 +2,8 @@
     <string name="app_name">Train Indicator</string>
     <string name="western_railway">WESTERN RAILWAY</string>
     <string name="central_railway">CENTRAL RAILWAY</string>
+    <string name="current_location">Current location</string>
+    <string name="virar_india">Virar ,India</string>
+    <string name="nearest_fast_station">Nearest fast station</string>
+    <string name="nalasopara">Nalasopara</string>
 </resources>
