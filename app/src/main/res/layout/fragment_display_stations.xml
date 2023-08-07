@@ -23,7 +23,8 @@
             app:menu="@menu/menu_railway_type"
             app:title="@string/app_name"
             app:titleCentered="true"
-            app:subtitleCentered="true"/>
+            app:subtitleCentered="true"
+            app:navigationIcon="@drawable/baseline_menu_24"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -31,11 +32,10 @@
             android:id="@+id/mapView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:contentDescription="Map with Mumbai local railway stations are displayed."
             app:layout_constraintTop_toBottomOf="@+id/appbar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
