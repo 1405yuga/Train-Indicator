@@ -55,28 +55,29 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         binding.mapView.getMapAsync(this)
 
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
-            if(menuItem.itemId == R.id.central_railway || menuItem.itemId==R.id.western_railway){
-                if(menuItem.itemId == R.id.central_railway){
-                    updateList(ProjectConstants.CENTRAL_RAILWAY)
-                }
-                else{
-                    updateList(ProjectConstants.WESTERN_RAILWAY)
+            if (menuItem.itemId == R.id.central_railway || menuItem.itemId == R.id.western_railway) {
+                if (menuItem.itemId == R.id.central_railway) {
+                    viewModel.setRailwayType(ProjectConstants.CENTRAL_RAILWAY)
+                } else {
+                    viewModel.setRailwayType(ProjectConstants.WESTERN_RAILWAY)
                 }
                 menuItem.isChecked = true
                 return@setOnMenuItemClickListener true
-            }
-            else{
+            } else {
                 return@setOnMenuItemClickListener false
             }
 
         }
+        viewModel.railwayType.observe(viewLifecycleOwner, Observer {
+            binding.topAppBar.subtitle =
+                if (it == ProjectConstants.WESTERN_RAILWAY) resources.getString(R.string.western_railway)
+                else resources.getString(R.string.central_railway)
+            FirestoreFunctions.getStations(requireContext(), it, viewModel.updateStationList)
+        })
 
         return binding.root
     }
 
-    private fun updateList(railwayType : String){
-        FirestoreFunctions.getStations(requireContext(),railwayType, viewModel.updateStationList)
-    }
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
