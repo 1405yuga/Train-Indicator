@@ -114,7 +114,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                 )
             )?.showInfoWindow()
             mMap.moveCamera(
-                CameraUpdateFactory.newLatLngZoom(it, 12.0f)
+                CameraUpdateFactory.newLatLngZoom(it, 11.0f)
             )
         })
 
