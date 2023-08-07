@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.trainindicator.constants.ProjectConstants
 import com.example.trainindicator.databinding.FragmentDisplayStationsBinding
 import com.example.trainindicator.firebase.FirestoreFunctions
 import com.example.trainindicator.model.Station
@@ -53,8 +54,28 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         binding.mapView.onCreate(savedInstanceState)
         binding.mapView.getMapAsync(this)
 
-        FirestoreFunctions.getStations(requireContext(), viewModel.updateStationList)
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            if(menuItem.itemId == R.id.central_railway || menuItem.itemId==R.id.western_railway){
+                if(menuItem.itemId == R.id.central_railway){
+                    updateList(ProjectConstants.CENTRAL_RAILWAY)
+                }
+                else{
+                    updateList(ProjectConstants.WESTERN_RAILWAY)
+                }
+                menuItem.isChecked = true
+                return@setOnMenuItemClickListener true
+            }
+            else{
+                return@setOnMenuItemClickListener false
+            }
+
+        }
+
         return binding.root
+    }
+
+    private fun updateList(railwayType : String){
+        FirestoreFunctions.getStations(requireContext(),railwayType, viewModel.updateStationList)
     }
 
     private val requestPermissionLauncher =
@@ -114,12 +135,14 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                 )
             )?.showInfoWindow()
             mMap.moveCamera(
-                CameraUpdateFactory.newLatLngZoom(it, 11.0f)
+                CameraUpdateFactory.newLatLngZoom(it, 9.0f)
             )
         })
 
         viewModel.stationsList.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "viewmodel data : ${it.size}")
+            mMap.clear()
+            checkLocationPermission()
             for (doc in it) {
                 val station = doc.toObject(Station::class.java)
                 if (station != null) {
