@@ -3,7 +3,9 @@
     <string name="western_railway">WESTERN RAILWAY</string>
     <string name="central_railway">CENTRAL RAILWAY</string>
     <string name="current_location">Current location</string>
-    <string name="virar_india">Virar ,India</string>
     <string name="nearest_fast_station">Nearest fast station</string>
-    <string name="nalasopara">Nalasopara</string>
+    <string name="nearest_station">Nearest station</string>
+    <string name="you_are_here">You are here</string>
+    <string name="nearest_slow_station">Nearest slow station</string>
+    <string name="user_location">User location</string>
 </resources>
