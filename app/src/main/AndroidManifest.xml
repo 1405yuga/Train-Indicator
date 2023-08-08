@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrainIndicator"
         tools:targetApi="31">
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="@string/google_api_key"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDwukauvrmcRFRy1-VcTF6yjnRuPz_JdTg"/>
 
         <activity
             android:name=".MainActivity"
