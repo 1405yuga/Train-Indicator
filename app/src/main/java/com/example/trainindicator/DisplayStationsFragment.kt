@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -69,9 +70,11 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
 
         }
         viewModel.railwayType.observe(viewLifecycleOwner, Observer {
-            binding.topAppBar.subtitle =
+            val fullForm =
                 if (it == ProjectConstants.WESTERN_RAILWAY) resources.getString(R.string.western_railway)
                 else resources.getString(R.string.central_railway)
+            binding.topAppBar.subtitle = fullForm
+            binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.railwayType).text = fullForm
             FirestoreFunctions.getStations(requireContext(), it, viewModel.updateStationList)
         })
         binding.topAppBar.setNavigationOnClickListener {
