@@ -128,6 +128,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(p0: GoogleMap) {
         val mMap = p0
+        Log.d(TAG,"onMapReady called ${mMap}")
 
         viewModel.userLocation.observe(viewLifecycleOwner, Observer {
 
@@ -171,6 +172,8 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                 }
             }
         })
+
+
     }
 
 }
