@@ -79,6 +79,17 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         binding.topAppBar.setNavigationOnClickListener {
             binding.drawerLayout.open()
         }
+        viewModel.nearestStations.observe(viewLifecycleOwner, Observer { pairOfNearestStations ->
+
+            binding.navigationView.getHeaderView(0).apply {
+                findViewById<TextView>(R.id.nearest_fast_st).text =
+                    pairOfNearestStations.second?.toObject(Station::class.java)?.name ?: "Not found"
+
+                findViewById<TextView>(R.id.nearest_slow_st).text =
+                    pairOfNearestStations.first?.toObject(Station::class.java)?.name ?: "Not found"
+            }
+
+        })
 
         return binding.root
     }
@@ -139,10 +150,17 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(p0: GoogleMap) {
         val mMap = p0
-        Log.d(TAG,"onMapReady called ${mMap}")
+        Log.d(TAG, "onMapReady called ${mMap}")
 
         viewModel.userLocation.observe(viewLifecycleOwner, Observer {
-            binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.user_location).text = MapFunctions.getLocality(it,requireContext())
+            if (viewModel.stationsList.value != null) {
+                viewModel.nearestStations.value =
+                    MapFunctions.getNearestStation(it, viewModel.stationsList.value!!)
+            }
+
+            binding.navigationView.getHeaderView(0)
+                .findViewById<TextView>(R.id.user_location).text =
+                MapFunctions.getLocality(it, requireContext())
             mMap.addMarker(
                 MarkerOptions().position(it).title("You are here!").icon(
                     BitmapDescriptorFactory.fromBitmap(
@@ -157,6 +175,10 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
 
         viewModel.stationsList.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "viewmodel data : ${it.size}")
+            if (viewModel.userLocation.value != null) {
+                viewModel.nearestStations.value =
+                    MapFunctions.getNearestStation(viewModel.userLocation.value!!, it)
+            }
             mMap.clear()
             checkLocationPermission()
             for (doc in it) {

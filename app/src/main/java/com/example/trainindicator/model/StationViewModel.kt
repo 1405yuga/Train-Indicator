@@ -31,6 +31,8 @@ class StationViewModel : ViewModel() {
         this._railwayType.value = railwayType
     }
 
+    val nearestStations = MutableLiveData<Pair<DocumentSnapshot?, DocumentSnapshot?>>()
+
     private var _stationsList = MutableLiveData(listOf<DocumentSnapshot>())
     val stationsList: LiveData<List<DocumentSnapshot>> = _stationsList
 

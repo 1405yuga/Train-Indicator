@@ -3,7 +3,6 @@ package com.example.trainindicator.firebase
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import com.example.trainindicator.constants.ProjectConstants
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -12,12 +11,11 @@ private const val TAG = "FirestoreFunctions tag"
 object FirestoreFunctions {
 
     fun getStations(
-        context: Context, railwayType: String, status : String,
+        context: Context, railwayType: String,
         updateStationList: (List<DocumentSnapshot>) -> (Unit)
     ) {
         val firestore = FirebaseFirestore.getInstance()
         firestore.collection(railwayType)
-            .whereEqualTo("status",status)
             .get()
             .addOnSuccessListener {
                 updateStationList(it.documents)

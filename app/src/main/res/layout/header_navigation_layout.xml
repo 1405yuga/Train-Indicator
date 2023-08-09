@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="3dp"
                     android:layout_weight="1"
-                    android:text="@string/nearest_fast_station" />
+                    android:text="@string/not_found" />
 
             </LinearLayout>
 
@@ -142,7 +142,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:contentDescription="@string/current_location"
+                    android:contentDescription="@string/nearest_slow_station"
                     android:src="@drawable/red_marker" />
 
                 <TextView
@@ -151,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="3dp"
                     android:layout_weight="1"
-                    android:text="@string/nearest_slow_station" />
+                    android:text="@string/not_found" />
 
             </LinearLayout>
         </LinearLayout>
