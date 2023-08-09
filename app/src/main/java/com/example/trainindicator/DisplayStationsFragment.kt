@@ -74,7 +74,8 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                 if (it == ProjectConstants.WESTERN_RAILWAY) resources.getString(R.string.western_railway)
                 else resources.getString(R.string.central_railway)
             binding.topAppBar.subtitle = fullForm
-            binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.railwayType).text = fullForm
+            binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.railwayType).text =
+                fullForm
             FirestoreFunctions.getStations(requireContext(), it, viewModel.updateStationList)
         })
         binding.topAppBar.setNavigationOnClickListener {
@@ -134,7 +135,6 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         Log.d(TAG,"onMapReady called ${mMap}")
 
         viewModel.userLocation.observe(viewLifecycleOwner, Observer {
-
             mMap.addMarker(
                 MarkerOptions().position(it).title("You are here!").icon(
                     BitmapDescriptorFactory.fromBitmap(
