@@ -9,5 +9,14 @@
         android:id="@+id/displayStationsFragment"
         android:name="com.example.trainindicator.DisplayStationsFragment"
         android:label="fragment_display_stations"
-        tools:layout="@layout/fragment_display_stations" />
+        tools:layout="@layout/fragment_display_stations" >
+        <action
+            android:id="@+id/action_displayStationsFragment_to_platformGuideFragment"
+            app:destination="@id/platformGuideFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/platformGuideFragment"
+        android:name="com.example.trainindicator.PlatformGuideFragment"
+        android:label="fragment_platform_guide"
+        tools:layout="@layout/fragment_platform_guide" />
 </navigation>
