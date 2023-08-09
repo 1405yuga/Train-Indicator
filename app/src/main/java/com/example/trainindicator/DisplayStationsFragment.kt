@@ -49,12 +49,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         binding = FragmentDisplayStationsBinding.inflate(inflater, container, false)
 
         checkLocationPermission()
-        MapsInitializer.initialize(requireContext(), MapsInitializer.Renderer.LATEST) {
-            Log.d(TAG, "Map initializer $it")
-        }
-
-        binding.mapView.onCreate(savedInstanceState)
-        binding.mapView.getMapAsync(this)
+        mapInitializer(savedInstanceState)
 
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             if (menuItem.itemId == R.id.central_railway || menuItem.itemId == R.id.western_railway) {
@@ -70,6 +65,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
             }
 
         }
+
         viewModel.railwayType.observe(viewLifecycleOwner, Observer {
             val fullForm =
                 if (it == ProjectConstants.WESTERN_RAILWAY) resources.getString(R.string.western_railway)
@@ -79,11 +75,21 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                 fullForm
             FirestoreFunctions.getStations(requireContext(), it, viewModel.updateStationList)
         })
+
         binding.topAppBar.setNavigationOnClickListener {
             binding.drawerLayout.open()
         }
 
         return binding.root
+    }
+
+    private fun mapInitializer(savedInstanceState: Bundle?) {
+        MapsInitializer.initialize(requireContext(), MapsInitializer.Renderer.LATEST) {
+            Log.d(TAG, "Map initializer $it")
+        }
+
+        binding.mapView.onCreate(savedInstanceState)
+        binding.mapView.getMapAsync(this)
     }
 
 
