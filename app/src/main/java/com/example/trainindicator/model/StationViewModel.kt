@@ -24,13 +24,6 @@ class StationViewModel : ViewModel() {
         this._userLocation.value = userLocation
     }
 
-    private val _userLocality = MutableLiveData<String>()
-    val userLocality: LiveData<String> = _userLocality
-
-    fun setUserLocationLocality(userLocality: String) {
-        this._userLocality.value = userLocality
-    }
-
     private val _railwayType = MutableLiveData(ProjectConstants.WESTERN_RAILWAY)
     val railwayType: LiveData<String> = _railwayType
 

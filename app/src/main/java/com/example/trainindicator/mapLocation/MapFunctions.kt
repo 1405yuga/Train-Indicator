@@ -43,7 +43,7 @@ object MapFunctions {
                 val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
                 Log.d(
                     TAG,
-                    "GeoCode - else loop ${addresses?.get(0)?.locality}}"
+                    "GeoCode - else loop ${addresses?.get(0)?.locality}"
                 )
                 locality = addresses?.get(0)?.locality.toString()
             } catch (e: Exception) {

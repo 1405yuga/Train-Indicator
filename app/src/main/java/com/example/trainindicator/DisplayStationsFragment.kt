@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.trainindicator.constants.ProjectConstants
 import com.example.trainindicator.databinding.FragmentDisplayStationsBinding
 import com.example.trainindicator.firebase.FirestoreFunctions
+import com.example.trainindicator.mapLocation.MapFunctions
 import com.example.trainindicator.model.Station
 import com.example.trainindicator.model.StationViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -135,6 +136,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         Log.d(TAG,"onMapReady called ${mMap}")
 
         viewModel.userLocation.observe(viewLifecycleOwner, Observer {
+            binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.user_location).text = MapFunctions.getLocality(it,requireContext())
             mMap.addMarker(
                 MarkerOptions().position(it).title("You are here!").icon(
                     BitmapDescriptorFactory.fromBitmap(
