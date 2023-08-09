@@ -8,4 +8,9 @@
     <string name="you_are_here">You are here</string>
     <string name="nearest_slow_station">Nearest slow station</string>
     <string name="not_found">Not found</string>
+    <string name="platform_guide">Platform Guide</string>
+    <string name="exit">Exit</string>
+    <string name="help">Help</string>
+    <string name="app_guide">App guide</string>
+    <string name="display_stations">Display Stations</string>
 </resources>

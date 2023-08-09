@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/display_station"
+        android:icon="@drawable/display_station"
+        android:title="@string/display_stations" />
+    <item
+        android:id="@+id/platform_guide"
+        android:icon="@drawable/platform_guide"
+        android:title="@string/platform_guide" />
+    <item
+        android:id="@+id/app_guide"
+        android:icon="@drawable/app_guide"
+        android:title="@string/app_guide" />
+    <item
+        android:id="@+id/help"
+        android:icon="@drawable/help_"
+        android:title="@string/help" />
+    <item
+        android:id="@+id/exit_app"
+        android:icon="@drawable/exit_"
+        android:title="@string/exit" />
+
+</menu>
