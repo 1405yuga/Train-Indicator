@@ -1,4 +1,5 @@
 package com.example.trainindicator.mapLocation
+
 import android.content.Context
 import android.location.Address
 import android.location.Geocoder
@@ -6,14 +7,13 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.android.gms.maps.model.LatLng
 
 private const val TAG = "MapFunctions tag"
 
 object MapFunctions {
 
-    fun getLocality(latLng: LatLng, context: Context) : String {
+    fun getLocality(latLng: LatLng, context: Context): String {
 
         val geocoder = Geocoder(context)
         var locality = "Not found"
@@ -28,7 +28,11 @@ object MapFunctions {
 
                     override fun onError(errorMessage: String?) {
                         super.onError(errorMessage)
-                        Toast.makeText(context,"Unable to get your current locality",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            "Unable to get your current locality",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         Log.d(TAG, "GeoCode error ${errorMessage}")
 
                     }
@@ -43,7 +47,8 @@ object MapFunctions {
                 )
                 locality = addresses?.get(0)?.locality.toString()
             } catch (e: Exception) {
-                Toast.makeText(context,"Unable to get your current locality",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Unable to get your current locality", Toast.LENGTH_SHORT)
+                    .show()
                 Log.d(TAG, "GeoCode error - else loop ${e.message}")
             }
         }
