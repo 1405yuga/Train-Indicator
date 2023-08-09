@@ -7,6 +7,7 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.example.trainindicator.constants.ProjectConstants
 import com.google.android.gms.maps.model.LatLng
 
 private const val TAG = "MapFunctions tag"
@@ -54,4 +55,19 @@ object MapFunctions {
         }
         return locality
     }
+
+    private fun haversineDistanceCalculation(userLocation: LatLng, station: LatLng): Double {
+        val lat1 = userLocation.latitude
+        val lat2 = station.latitude
+        val lon1 = userLocation.longitude
+        val lon2 = station.longitude
+        val dLat = Math.toRadians(lat2 - lat1)
+        val dLon = Math.toRadians(lon2 - lon1)
+        val a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2)
+        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+        return ProjectConstants.EARTH_RADIUS_IN_KM * c
+    }
+
 }
