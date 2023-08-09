@@ -72,31 +72,35 @@ object MapFunctions {
         return ProjectConstants.EARTH_RADIUS_IN_KM * c
     }
 
-    fun getNearestFastStation(
+    fun getNearestStation(
         userLocation: LatLng,
         stationsList: List<DocumentSnapshot>
-    ): DocumentSnapshot {
-        var nearestStation = stationsList.get(0)
-        var minDistance = haversineDistanceCalculation(
-            userLocation, LatLng(
-                nearestStation.toObject(Station::class.java)?.coordinates!!.latitude,
-                nearestStation.toObject(Station::class.java)?.coordinates!!.longitude
-            )
-        )
+    ): Pair<DocumentSnapshot?, DocumentSnapshot?> {
+        var nearestSlowStation: DocumentSnapshot? = null
+        var nearestFastStation: DocumentSnapshot? = null
 
-        for (station in stationsList) {
-            val temp = haversineDistanceCalculation(
-                userLocation, LatLng(
-                    station.toObject(Station::class.java)?.coordinates!!.latitude,
-                    station.toObject(Station::class.java)?.coordinates!!.longitude
-                )
-            )
-            if (temp < minDistance) {
-                minDistance = temp
-                nearestStation = station
+        var minDistanceToSlowStation = Double.MAX_VALUE
+        var minDistanceToFastStation = Double.MAX_VALUE
+
+        for (stationSnapshot in stationsList) {
+            val station = stationSnapshot.toObject(Station::class.java)
+            if (station != null && station.coordinates != null) {
+                val stationLatLng =
+                    LatLng(station.coordinates.latitude, station.coordinates.longitude)
+                val distance = haversineDistanceCalculation(userLocation, stationLatLng)
+
+                if (station.status == ProjectConstants.SLOW && distance < minDistanceToSlowStation) {
+                    minDistanceToSlowStation = distance
+                    nearestSlowStation = stationSnapshot
+                }
+
+                if (station.status == ProjectConstants.FAST && distance < minDistanceToFastStation) {
+                    minDistanceToFastStation = distance
+                    nearestFastStation = stationSnapshot
+                }
             }
         }
-        return nearestStation
+        return Pair(nearestSlowStation, nearestFastStation)
     }
 
 }
