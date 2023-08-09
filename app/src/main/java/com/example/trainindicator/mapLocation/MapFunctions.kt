@@ -8,7 +8,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.trainindicator.constants.ProjectConstants
+import com.example.trainindicator.model.Station
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.firestore.DocumentSnapshot
 
 private const val TAG = "MapFunctions tag"
 
@@ -68,6 +70,33 @@ object MapFunctions {
                 Math.sin(dLon / 2) * Math.sin(dLon / 2)
         val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
         return ProjectConstants.EARTH_RADIUS_IN_KM * c
+    }
+
+    fun getNearestFastStation(
+        userLocation: LatLng,
+        stationsList: List<DocumentSnapshot>
+    ): DocumentSnapshot {
+        var nearestStation = stationsList.get(0)
+        var minDistance = haversineDistanceCalculation(
+            userLocation, LatLng(
+                nearestStation.toObject(Station::class.java)?.coordinates!!.latitude,
+                nearestStation.toObject(Station::class.java)?.coordinates!!.longitude
+            )
+        )
+
+        for (station in stationsList) {
+            val temp = haversineDistanceCalculation(
+                userLocation, LatLng(
+                    station.toObject(Station::class.java)?.coordinates!!.latitude,
+                    station.toObject(Station::class.java)?.coordinates!!.longitude
+                )
+            )
+            if (temp < minDistance) {
+                minDistance = temp
+                nearestStation = station
+            }
+        }
+        return nearestStation
     }
 
 }
