@@ -73,6 +73,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         when(menuItem.itemId){
             R.id.platform_guide->{
                 navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToPlatformGuideFragment())
+                binding.drawerLayout.close()
                 true
             }
             else ->{

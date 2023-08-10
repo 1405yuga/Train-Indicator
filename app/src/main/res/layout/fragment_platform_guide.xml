@@ -18,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="@string/platform_guide"
-            app:navigationIcon="@drawable/back_icon"/>
+            app:navigationIcon="@drawable/back_icon"
+            app:menu="@menu/menu_railway_type"/>
     </com.google.android.material.appbar.AppBarLayout>
 
 </FrameLayout>

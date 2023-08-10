@@ -21,6 +21,8 @@
         tools:layout="@layout/fragment_platform_guide" >
         <action
             android:id="@+id/action_platformGuideFragment_to_displayStationsFragment"
-            app:destination="@id/displayStationsFragment" />
+            app:destination="@id/displayStationsFragment"
+            app:popUpTo="@id/displayStationsFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>
