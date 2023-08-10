@@ -27,6 +27,11 @@ class PlatformGuideFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(StationViewModel::class.java)
         binding = FragmentPlatformGuideBinding.inflate(inflater,container,false)
 
+        viewModel.railwayType.observe(viewLifecycleOwner, Observer {
+            binding.topAppBar.subtitle =
+                if (it == ProjectConstants.WESTERN_RAILWAY) resources.getString(R.string.western_railway)
+                else resources.getString(R.string.central_railway)
+        })
         return binding.root
     }
 
