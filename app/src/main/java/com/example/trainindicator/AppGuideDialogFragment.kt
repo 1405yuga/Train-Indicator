@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.trainindicator.databinding.FragmentAppGuideDialogListDialogBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class AppGuideDialogFragment : BottomSheetDialogFragment() {
@@ -23,6 +24,8 @@ class AppGuideDialogFragment : BottomSheetDialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        BottomSheetBehavior.from(binding.bottomSheetLayout).state = BottomSheetBehavior.STATE_EXPANDED
+
     }
 
     override fun onDestroyView() {

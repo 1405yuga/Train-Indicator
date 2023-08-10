@@ -13,4 +13,9 @@
     <string name="help">Help</string>
     <string name="app_guide">App guide</string>
     <string name="your_current_location">: Your current location</string>
+    <string name="fast_station">Fast station</string>
+    <string name="fast_station_">: Fast Station</string>
+    <string name="slow_station">Slow Station</string>
+    <string name="slow_station_">: Slow Station</string>
+    <string name="station_code">: Station Code</string>
 </resources>
