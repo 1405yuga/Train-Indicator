@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/display_station"
-        android:icon="@drawable/display_station"
-        android:title="@string/display_stations" />
+
     <item
         android:id="@+id/platform_guide"
         android:icon="@drawable/platform_guide"

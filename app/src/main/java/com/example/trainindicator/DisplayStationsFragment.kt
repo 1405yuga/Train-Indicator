@@ -14,6 +14,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.example.trainindicator.constants.ProjectConstants
 import com.example.trainindicator.databinding.FragmentDisplayStationsBinding
 import com.example.trainindicator.firebase.FirestoreFunctions
@@ -66,6 +68,20 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
 
         }
 
+        binding.navigationView.setNavigationItemSelectedListener { menuItem ->
+
+        when(menuItem.itemId){
+            R.id.platform_guide->{
+                navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToPlatformGuideFragment())
+                true
+            }
+            else ->{
+                false
+            }
+        }
+
+        }
+
         viewModel.railwayType.observe(viewLifecycleOwner, Observer {
             val fullForm =
                 if (it == ProjectConstants.WESTERN_RAILWAY) resources.getString(R.string.western_railway)
@@ -103,6 +119,9 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         binding.mapView.getMapAsync(this)
     }
 
+    private fun navigateToMenuFragment(action:NavDirections){
+        findNavController().navigate(action)
+    }
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
