@@ -73,13 +73,10 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         when(menuItem.itemId){
             R.id.platform_guide->{
                 navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToPlatformGuideFragment())
-                binding.drawerLayout.close()
-                true
+
             }
             R.id.app_guide ->{
                 navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToAppGuideDialogFragment())
-                binding.drawerLayout.close()
-                true
             }
             else ->{
                 false
@@ -125,8 +122,10 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         binding.mapView.getMapAsync(this)
     }
 
-    private fun navigateToMenuFragment(action:NavDirections){
+    private fun navigateToMenuFragment(action:NavDirections): Boolean{
         findNavController().navigate(action)
+        binding.drawerLayout.close()
+        return true
     }
 
     private val requestPermissionLauncher =
