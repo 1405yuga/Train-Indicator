@@ -70,18 +70,24 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
 
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
 
-        when(menuItem.itemId){
-            R.id.platform_guide->{
-                navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToPlatformGuideFragment())
+            when (menuItem.itemId) {
+                R.id.platform_guide -> {
+                    navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToPlatformGuideFragment())
+                }
 
+                R.id.app_guide -> {
+                    navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToAppGuideDialogFragment())
+                }
+
+                R.id.exit_app -> {
+                    requireActivity().finish()
+                    true
+                }
+
+                else -> {
+                    false
+                }
             }
-            R.id.app_guide ->{
-                navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToAppGuideDialogFragment())
-            }
-            else ->{
-                false
-            }
-        }
 
         }
 
@@ -122,7 +128,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         binding.mapView.getMapAsync(this)
     }
 
-    private fun navigateToMenuFragment(action:NavDirections): Boolean{
+    private fun navigateToMenuFragment(action: NavDirections): Boolean {
         findNavController().navigate(action)
         binding.drawerLayout.close()
         return true
