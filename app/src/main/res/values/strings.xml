@@ -12,4 +12,5 @@
     <string name="exit">Exit</string>
     <string name="help">Help</string>
     <string name="app_guide">App guide</string>
+    <string name="your_current_location">: Your current location</string>
 </resources>

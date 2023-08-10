@@ -76,6 +76,11 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                 binding.drawerLayout.close()
                 true
             }
+            R.id.app_guide ->{
+                navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToAppGuideDialogFragment())
+                binding.drawerLayout.close()
+                true
+            }
             else ->{
                 false
             }

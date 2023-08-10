@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_displayStationsFragment_to_platformGuideFragment"
             app:destination="@id/platformGuideFragment" />
+        <action
+            android:id="@+id/action_displayStationsFragment_to_appGuideDialogFragment"
+            app:destination="@id/appGuideDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/platformGuideFragment"
@@ -25,4 +28,12 @@
             app:popUpTo="@id/displayStationsFragment"
             app:popUpToInclusive="true"/>
     </fragment>
+    <dialog
+        android:id="@+id/appGuideDialogFragment"
+        android:name="com.example.trainindicator.AppGuideDialogFragment"
+        android:label="AppGuideDialogFragment" >
+        <action
+            android:id="@+id/action_appGuideDialogFragment_to_displayStationsFragment"
+            app:destination="@id/displayStationsFragment" />
+    </dialog>
 </navigation>
