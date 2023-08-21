@@ -2,6 +2,8 @@ package com.example.trainindicator
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.icu.text.CaseMap.Title
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -29,10 +31,14 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.toObject
+import org.checkerframework.checker.units.qual.s
 
 private const val TAG = "DisplayStationsFragment tag"
 
@@ -146,7 +152,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                 // Permission denied, handle this situation (e.g., show an explanation or disable location-related features)
                 Toast.makeText(
                     requireContext(),
-                    "If location permission note allowed nearest station won't be fetched",
+                    "If location permission not allowed nearest station won't be fetched",
                     Toast.LENGTH_LONG
                 ).show()
                 Log.d(TAG, "Location permission denied")
@@ -180,8 +186,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    override fun onMapReady(p0: GoogleMap) {
-        val mMap = p0
+    override fun onMapReady(mMap: GoogleMap) {
         Log.d(TAG, "onMapReady called ${mMap}")
 
         viewModel.userLocation.observe(viewLifecycleOwner, Observer {
@@ -216,24 +221,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
             for (doc in it) {
                 val station = doc.toObject(Station::class.java)
                 if (station != null) {
-                    val position = LatLng(
-                        station.coordinates!!.latitude,
-                        station.coordinates.longitude
-                    )
-                    mMap.addMarker(
-                        MarkerOptions().position(position)
-                            .title(station.name)
-                            .icon(
-                                BitmapDescriptorFactory.fromBitmap(
-                                    viewModel.createMarkerIcon(
-                                        doc.id,
-                                        station.status,
-                                        requireContext()
-                                    )!!
-                                )
-                            )
-                    )
-
+                    addStationMarker(mMap, doc)
                 }
             }
         })
@@ -242,80 +230,66 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
             findViewById<LinearLayout>(R.id.user_location_layout)
                 .setOnClickListener {
                     binding.drawerLayout.close()
-                    mMap.addMarker(
-                        MarkerOptions().position(viewModel.userLocation.value!!).title("You are here!")
-                            .icon(
-                                BitmapDescriptorFactory.fromBitmap(
-                                    viewModel.createMarkerIcon(null, null, requireContext())!!
+                    if(viewModel.userLocation.value!=null){
+                        mMap.addMarker(
+                            MarkerOptions().position(viewModel.userLocation.value!!).title("You are here!")
+                                .icon(
+                                    BitmapDescriptorFactory.fromBitmap(
+                                        viewModel.createMarkerIcon(null, null, requireContext())!!
+                                    )
                                 )
-                            )
-                    )?.showInfoWindow()
-                    mMap.moveCamera(
-                        CameraUpdateFactory.newLatLngZoom(viewModel.userLocation.value!!, 12.0f)
-                    )
+                        )?.showInfoWindow()
+                        mMap.moveCamera(
+                            CameraUpdateFactory.newLatLngZoom(viewModel.userLocation.value!!, 12.0f)
+                        )
+                    }
+                    else{
+                        Toast.makeText(requireContext(),"Location permission not granted!",Toast.LENGTH_SHORT).show()
+                    }
                 }
 
             findViewById<LinearLayout>(R.id.nearest_slow_st_layout)
                 .setOnClickListener {
-                    binding.drawerLayout.close()
                     val stationDoc = viewModel.nearestStations.value?.first
-                    val station = stationDoc?.toObject(Station::class.java)
-                    if (station != null) {
-                        val position = LatLng(
-                            station.coordinates!!.latitude,
-                            station.coordinates.longitude
-                        )
-                        mMap.addMarker(
-                            MarkerOptions().position(position)
-                                .title(station.name)
-                                .icon(
-                                    BitmapDescriptorFactory.fromBitmap(
-                                        viewModel.createMarkerIcon(
-                                            stationDoc.id,
-                                            station.status,
-                                            requireContext()
-                                        )!!
-                                    )
-                                )
-                        )?.showInfoWindow()
-                        mMap.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(position, 12.0f)
-                        )
-                    }
+                    addStationMarker(mMap,stationDoc,12.0f)
                 }
             findViewById<LinearLayout>(R.id.nearest_fast_st_layout)
                 .setOnClickListener {
-                    binding.drawerLayout.close()
                     val stationDoc = viewModel.nearestStations.value?.second
-                    val station = stationDoc?.toObject(Station::class.java)
-                    if (station != null) {
-                        val position = LatLng(
-                            station.coordinates!!.latitude,
-                            station.coordinates.longitude
-                        )
-                        mMap.addMarker(
-                            MarkerOptions().position(position)
-                                .title(station.name)
-                                .icon(
-                                    BitmapDescriptorFactory.fromBitmap(
-                                        viewModel.createMarkerIcon(
-                                            stationDoc.id,
-                                            station.status,
-                                            requireContext()
-                                        )!!
-                                    )
-                                )
-                        )?.showInfoWindow()
-                        mMap.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(position, 12.0f)
-                        )
-                    }
+                    addStationMarker(mMap,stationDoc,12.0f)
                 }
-
         }
 
+    }
 
-
+    private fun addStationMarker(mMap: GoogleMap,stationDoc: DocumentSnapshot?,zoomLevel : Float = 9.0f){
+        val station = stationDoc?.toObject(Station::class.java)
+        binding.drawerLayout.close()
+        if (station != null) {
+            val position = LatLng(
+                station.coordinates!!.latitude,
+                station.coordinates.longitude
+            )
+            mMap.addMarker(
+                MarkerOptions().position(position)
+                    .title(station.name)
+                    .icon(
+                        BitmapDescriptorFactory.fromBitmap(
+                            viewModel.createMarkerIcon(
+                                stationDoc.id,
+                                station.status,
+                                requireContext()
+                            )!!
+                        )
+                    )
+            )?.showInfoWindow()
+            mMap.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(position, zoomLevel)
+            )
+        }
+        else{
+            Toast.makeText(requireContext(),"Location permission not granted!",Toast.LENGTH_SHORT).show()
+        }
     }
 
 }
