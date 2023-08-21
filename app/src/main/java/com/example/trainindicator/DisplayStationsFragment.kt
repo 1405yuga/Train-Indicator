@@ -1,7 +1,9 @@
 package com.example.trainindicator
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -78,7 +80,8 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                 }
 
                 R.id.help -> {
-                    navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToHelpFragment())
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/1405yuga/Train-Indicator/blob/main/README.md")))
+                    true
                 }
 
                 R.id.exit_app -> {
