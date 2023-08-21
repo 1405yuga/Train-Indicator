@@ -198,16 +198,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
             binding.navigationView.getHeaderView(0)
                 .findViewById<TextView>(R.id.user_location).text =
                 MapFunctions.getLocality(it, requireContext())
-            mMap.addMarker(
-                MarkerOptions().position(it).title("You are here!").icon(
-                    BitmapDescriptorFactory.fromBitmap(
-                        viewModel.createMarkerIcon(null, null, requireContext())!!
-                    )
-                )
-            )?.showInfoWindow()
-            mMap.moveCamera(
-                CameraUpdateFactory.newLatLngZoom(it, 9.0f)
-            )
+            addUserLocationMarker(mMap)
         })
 
         viewModel.stationsList.observe(viewLifecycleOwner, Observer {
@@ -229,23 +220,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         binding.navigationView.getHeaderView(0).apply {
             findViewById<LinearLayout>(R.id.user_location_layout)
                 .setOnClickListener {
-                    binding.drawerLayout.close()
-                    if(viewModel.userLocation.value!=null){
-                        mMap.addMarker(
-                            MarkerOptions().position(viewModel.userLocation.value!!).title("You are here!")
-                                .icon(
-                                    BitmapDescriptorFactory.fromBitmap(
-                                        viewModel.createMarkerIcon(null, null, requireContext())!!
-                                    )
-                                )
-                        )?.showInfoWindow()
-                        mMap.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(viewModel.userLocation.value!!, 12.0f)
-                        )
-                    }
-                    else{
-                        Toast.makeText(requireContext(),"Location permission not granted!",Toast.LENGTH_SHORT).show()
-                    }
+                    addUserLocationMarker(mMap,12.0f)
                 }
 
             findViewById<LinearLayout>(R.id.nearest_slow_st_layout)
@@ -285,6 +260,26 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
             )?.showInfoWindow()
             mMap.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(position, zoomLevel)
+            )
+        }
+        else{
+            Toast.makeText(requireContext(),"Location permission not granted!",Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun addUserLocationMarker(mMap: GoogleMap,zoomLevel : Float = 9.0f){
+        binding.drawerLayout.close()
+        if(viewModel.userLocation.value!=null){
+            mMap.addMarker(
+                MarkerOptions().position(viewModel.userLocation.value!!).title("You are here!")
+                    .icon(
+                        BitmapDescriptorFactory.fromBitmap(
+                            viewModel.createMarkerIcon(null, null, requireContext())!!
+                        )
+                    )
+            )?.showInfoWindow()
+            mMap.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(viewModel.userLocation.value!!, zoomLevel)
             )
         }
         else{
