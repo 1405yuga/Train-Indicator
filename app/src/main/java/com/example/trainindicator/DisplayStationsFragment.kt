@@ -2,8 +2,6 @@ package com.example.trainindicator
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.icu.text.CaseMap.Title
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -31,14 +29,10 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.ktx.toObject
-import org.checkerframework.checker.units.qual.s
 
 private const val TAG = "DisplayStationsFragment tag"
 
@@ -87,6 +81,10 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                     navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToAppGuideDialogFragment())
                 }
 
+                R.id.help -> {
+                    navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToHelpFragment())
+                }
+
                 R.id.exit_app -> {
                     requireActivity().finish()
                     true
@@ -121,9 +119,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                 findViewById<TextView>(R.id.nearest_slow_st).text =
                     pairOfNearestStations.first?.toObject(Station::class.java)?.name ?: "Not found"
             }
-
         })
-
         return binding.root
     }
 
@@ -220,24 +216,28 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         binding.navigationView.getHeaderView(0).apply {
             findViewById<LinearLayout>(R.id.user_location_layout)
                 .setOnClickListener {
-                    addUserLocationMarker(mMap,12.0f)
+                    addUserLocationMarker(mMap, 12.0f)
                 }
 
             findViewById<LinearLayout>(R.id.nearest_slow_st_layout)
                 .setOnClickListener {
                     val stationDoc = viewModel.nearestStations.value?.first
-                    addStationMarker(mMap,stationDoc,12.0f)
+                    addStationMarker(mMap, stationDoc, 12.0f)
                 }
             findViewById<LinearLayout>(R.id.nearest_fast_st_layout)
                 .setOnClickListener {
                     val stationDoc = viewModel.nearestStations.value?.second
-                    addStationMarker(mMap,stationDoc,12.0f)
+                    addStationMarker(mMap, stationDoc, 12.0f)
                 }
         }
 
     }
 
-    private fun addStationMarker(mMap: GoogleMap,stationDoc: DocumentSnapshot?,zoomLevel : Float = 9.0f){
+    private fun addStationMarker(
+        mMap: GoogleMap,
+        stationDoc: DocumentSnapshot?,
+        zoomLevel: Float = 9.0f
+    ) {
         val station = stationDoc?.toObject(Station::class.java)
         binding.drawerLayout.close()
         if (station != null) {
@@ -261,15 +261,15 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
             mMap.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(position, zoomLevel)
             )
-        }
-        else{
-            Toast.makeText(requireContext(),"Location permission not granted!",Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "Location permission not granted!", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
-    private fun addUserLocationMarker(mMap: GoogleMap,zoomLevel : Float = 9.0f){
+    private fun addUserLocationMarker(mMap: GoogleMap, zoomLevel: Float = 9.0f) {
         binding.drawerLayout.close()
-        if(viewModel.userLocation.value!=null){
+        if (viewModel.userLocation.value != null) {
             mMap.addMarker(
                 MarkerOptions().position(viewModel.userLocation.value!!).title("You are here!")
                     .icon(
@@ -281,9 +281,9 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
             mMap.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(viewModel.userLocation.value!!, zoomLevel)
             )
-        }
-        else{
-            Toast.makeText(requireContext(),"Location permission not granted!",Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "Location permission not granted!", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 

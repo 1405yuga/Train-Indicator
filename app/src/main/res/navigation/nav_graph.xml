@@ -9,31 +9,45 @@
         android:id="@+id/displayStationsFragment"
         android:name="com.example.trainindicator.DisplayStationsFragment"
         android:label="fragment_display_stations"
-        tools:layout="@layout/fragment_display_stations" >
+        tools:layout="@layout/fragment_display_stations">
         <action
             android:id="@+id/action_displayStationsFragment_to_platformGuideFragment"
             app:destination="@id/platformGuideFragment" />
         <action
             android:id="@+id/action_displayStationsFragment_to_appGuideDialogFragment"
             app:destination="@id/appGuideDialogFragment" />
+        <action
+            android:id="@+id/action_displayStationsFragment_to_helpFragment"
+            app:destination="@id/helpFragment" />
     </fragment>
     <fragment
         android:id="@+id/platformGuideFragment"
         android:name="com.example.trainindicator.PlatformGuideFragment"
         android:label="fragment_platform_guide"
-        tools:layout="@layout/fragment_platform_guide" >
+        tools:layout="@layout/fragment_platform_guide">
         <action
             android:id="@+id/action_platformGuideFragment_to_displayStationsFragment"
             app:destination="@id/displayStationsFragment"
             app:popUpTo="@id/displayStationsFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <dialog
         android:id="@+id/appGuideDialogFragment"
         android:name="com.example.trainindicator.AppGuideDialogFragment"
-        android:label="AppGuideDialogFragment" >
+        android:label="AppGuideDialogFragment">
         <action
             android:id="@+id/action_appGuideDialogFragment_to_displayStationsFragment"
             app:destination="@id/displayStationsFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.example.trainindicator.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help">
+        <action
+            android:id="@+id/action_helpFragment_to_displayStationsFragment"
+            app:destination="@id/displayStationsFragment"
+            app:popUpTo="@id/displayStationsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
