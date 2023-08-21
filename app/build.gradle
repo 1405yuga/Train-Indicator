@@ -61,4 +61,7 @@ dependencies {
     def nav_version = "2.5.2"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //data store
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 }
