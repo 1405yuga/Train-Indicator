@@ -31,6 +31,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.ktx.toObject
 
 private const val TAG = "DisplayStationsFragment tag"
 
@@ -235,6 +236,26 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                 }
             }
         })
+
+        binding.navigationView.getHeaderView(0).apply {
+            findViewById<TextView>(R.id.user_location)
+                .setOnClickListener {
+                    binding.drawerLayout.close()
+                    mMap.addMarker(
+                        MarkerOptions().position(viewModel.userLocation.value!!).title("You are here!")
+                            .icon(
+                                BitmapDescriptorFactory.fromBitmap(
+                                    viewModel.createMarkerIcon(null, null, requireContext())!!
+                                )
+                            )
+                    )?.showInfoWindow()
+                    mMap.moveCamera(
+                        CameraUpdateFactory.newLatLngZoom(viewModel.userLocation.value!!, 10.0f)
+                    )
+                }
+
+        }
+
 
 
     }
