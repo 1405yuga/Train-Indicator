@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_displayStationsFragment_to_appGuideDialogFragment"
             app:destination="@id/appGuideDialogFragment" />
-        <action
-            android:id="@+id/action_displayStationsFragment_to_helpFragment"
-            app:destination="@id/helpFragment" />
     </fragment>
     <dialog
         android:id="@+id/appGuideDialogFragment"
@@ -25,15 +22,4 @@
             android:id="@+id/action_appGuideDialogFragment_to_displayStationsFragment"
             app:destination="@id/displayStationsFragment" />
     </dialog>
-    <fragment
-        android:id="@+id/helpFragment"
-        android:name="com.example.trainindicator.HelpFragment"
-        android:label="fragment_help"
-        tools:layout="@layout/fragment_help">
-        <action
-            android:id="@+id/action_helpFragment_to_displayStationsFragment"
-            app:destination="@id/displayStationsFragment"
-            app:popUpTo="@id/displayStationsFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
 </navigation>

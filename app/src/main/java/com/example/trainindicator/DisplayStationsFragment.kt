@@ -73,7 +73,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         }
 
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
-
+            binding.drawerLayout.close()
             when (menuItem.itemId) {
                 R.id.app_guide -> {
                     navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToAppGuideDialogFragment())
@@ -133,7 +133,6 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
 
     private fun navigateToMenuFragment(action: NavDirections): Boolean {
         findNavController().navigate(action)
-        binding.drawerLayout.close()
         return true
     }
 
