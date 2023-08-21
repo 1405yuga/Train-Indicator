@@ -2,10 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/platform_guide"
-        android:icon="@drawable/platform_guide"
-        android:title="@string/platform_guide" />
-    <item
         android:id="@+id/app_guide"
         android:icon="@drawable/app_guide"
         android:title="@string/app_guide" />

@@ -73,10 +73,6 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
 
             when (menuItem.itemId) {
-                R.id.platform_guide -> {
-                    navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToPlatformGuideFragment())
-                }
-
                 R.id.app_guide -> {
                     navigateToMenuFragment(DisplayStationsFragmentDirections.actionDisplayStationsFragmentToAppGuideDialogFragment())
                 }
