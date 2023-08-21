@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -238,7 +239,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         })
 
         binding.navigationView.getHeaderView(0).apply {
-            findViewById<TextView>(R.id.user_location)
+            findViewById<LinearLayout>(R.id.user_location_layout)
                 .setOnClickListener {
                     binding.drawerLayout.close()
                     mMap.addMarker(
@@ -250,11 +251,11 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                             )
                     )?.showInfoWindow()
                     mMap.moveCamera(
-                        CameraUpdateFactory.newLatLngZoom(viewModel.userLocation.value!!, 10.0f)
+                        CameraUpdateFactory.newLatLngZoom(viewModel.userLocation.value!!, 12.0f)
                     )
                 }
 
-            findViewById<TextView>(R.id.nearest_slow_st)
+            findViewById<LinearLayout>(R.id.nearest_slow_st_layout)
                 .setOnClickListener {
                     binding.drawerLayout.close()
                     val stationDoc = viewModel.nearestStations.value?.first
@@ -278,11 +279,11 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                                 )
                         )?.showInfoWindow()
                         mMap.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(position, 10.0f)
+                            CameraUpdateFactory.newLatLngZoom(position, 12.0f)
                         )
                     }
                 }
-            findViewById<TextView>(R.id.nearest_fast_st)
+            findViewById<LinearLayout>(R.id.nearest_fast_st_layout)
                 .setOnClickListener {
                     binding.drawerLayout.close()
                     val stationDoc = viewModel.nearestStations.value?.second
@@ -306,7 +307,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                                 )
                         )?.showInfoWindow()
                         mMap.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(position, 10.0f)
+                            CameraUpdateFactory.newLatLngZoom(position, 12.0f)
                         )
                     }
                 }

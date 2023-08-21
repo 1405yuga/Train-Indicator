@@ -56,6 +56,7 @@
                         android:textStyle="bold" />
 
                     <LinearLayout
+                        android:id="@+id/user_location_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="4dp"
@@ -104,6 +105,7 @@
                         android:textStyle="bold" />
 
                     <LinearLayout
+                        android:id="@+id/nearest_fast_st_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="4dp"
@@ -128,6 +130,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/nearest_slow_st_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="4dp"
