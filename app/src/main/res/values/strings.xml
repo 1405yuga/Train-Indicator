@@ -20,4 +20,5 @@
     <string name="station_code">: Station Code</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="harbour_railway">HARBOUR RAILWAY</string>
 </resources>

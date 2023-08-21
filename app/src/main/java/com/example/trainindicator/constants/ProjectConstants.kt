@@ -5,6 +5,7 @@ object ProjectConstants {
     const val FAST = "FAST"
     const val WESTERN_RAILWAY = "WR"
     const val CENTRAL_RAILWAY = "CR"
+    const val HARBOUR_RAILWAY = "HR"
     const val ROUTES = "ROUTES"
     const val EARTH_RADIUS_IN_KM = 6371.0
 }

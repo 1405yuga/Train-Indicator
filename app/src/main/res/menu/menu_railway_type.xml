@@ -11,5 +11,9 @@
             android:id="@+id/central_railway"
             android:title="@string/central_railway"
             app:showAsAction="collapseActionView" />
+        <item
+            android:id="@+id/harbour_railway"
+            android:title="@string/harbour_railway"
+            app:showAsAction="collapseActionView" />
     </group>
 </menu>

@@ -58,11 +58,13 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         mapInitializer(savedInstanceState)
 
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
-            if (menuItem.itemId == R.id.central_railway || menuItem.itemId == R.id.western_railway) {
+            if (menuItem.itemId == R.id.central_railway || menuItem.itemId == R.id.western_railway || menuItem.itemId == R.id.harbour_railway) {
                 if (menuItem.itemId == R.id.central_railway) {
                     viewModel.setRailwayType(ProjectConstants.CENTRAL_RAILWAY)
-                } else {
+                } else if (menuItem.itemId == R.id.western_railway) {
                     viewModel.setRailwayType(ProjectConstants.WESTERN_RAILWAY)
+                } else {
+                    viewModel.setRailwayType(ProjectConstants.HARBOUR_RAILWAY)
                 }
                 menuItem.isChecked = true
                 return@setOnMenuItemClickListener true
@@ -80,7 +82,12 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                 }
 
                 R.id.help -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/1405yuga/Train-Indicator/blob/main/README.md")))
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("https://github.com/1405yuga/Train-Indicator/blob/main/README.md")
+                        )
+                    )
                     true
                 }
 
@@ -99,7 +106,8 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         viewModel.railwayType.observe(viewLifecycleOwner, Observer {
             val fullForm =
                 if (it == ProjectConstants.WESTERN_RAILWAY) resources.getString(R.string.western_railway)
-                else resources.getString(R.string.central_railway)
+                else if (it == ProjectConstants.CENTRAL_RAILWAY) resources.getString(R.string.central_railway)
+                else resources.getString(R.string.harbour_railway)
             binding.topAppBar.subtitle = fullForm
             binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.railwayType).text =
                 fullForm
