@@ -282,6 +282,34 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                         )
                     }
                 }
+            findViewById<TextView>(R.id.nearest_fast_st)
+                .setOnClickListener {
+                    binding.drawerLayout.close()
+                    val stationDoc = viewModel.nearestStations.value?.second
+                    val station = stationDoc?.toObject(Station::class.java)
+                    if (station != null) {
+                        val position = LatLng(
+                            station.coordinates!!.latitude,
+                            station.coordinates.longitude
+                        )
+                        mMap.addMarker(
+                            MarkerOptions().position(position)
+                                .title(station.name)
+                                .icon(
+                                    BitmapDescriptorFactory.fromBitmap(
+                                        viewModel.createMarkerIcon(
+                                            stationDoc.id,
+                                            station.status,
+                                            requireContext()
+                                        )!!
+                                    )
+                                )
+                        )?.showInfoWindow()
+                        mMap.moveCamera(
+                            CameraUpdateFactory.newLatLngZoom(position, 10.0f)
+                        )
+                    }
+                }
 
         }
 
