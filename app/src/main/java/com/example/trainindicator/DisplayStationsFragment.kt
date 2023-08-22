@@ -58,38 +58,56 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
             LocationServices.getFusedLocationProviderClient(requireContext())
         viewModel = ViewModelProvider(requireActivity()).get(StationViewModel::class.java)
         binding = FragmentDisplayStationsBinding.inflate(inflater, container, false)
-        binding.progressBar.visibility= View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
 
         checkLocationPermission()
         mapInitializer(savedInstanceState)
 
         preferenceRailwayType = PreferenceRailwayType(requireContext())
-        preferenceRailwayType.preferences.asLiveData().observe(viewLifecycleOwner, Observer { preferenceRailway ->
-            viewModel.setRailwayType(preferenceRailway)
-            if(preferenceRailway == ProjectConstants.CENTRAL_RAILWAY){
-                binding.topAppBar.menu.getItem(1).isChecked = true
-            }
-            else if(preferenceRailway == ProjectConstants.HARBOUR_RAILWAY){
-                binding.topAppBar.menu.getItem(2).isChecked = true
-            }
-            else{
-                binding.topAppBar.menu.getItem(0).isChecked = true
-            }
+        preferenceRailwayType.preferences.asLiveData()
+            .observe(viewLifecycleOwner, Observer { preferenceRailway ->
 
-        })
+                if (preferenceRailway == ProjectConstants.CENTRAL_RAILWAY) {
+                    binding.topAppBar.menu.getItem(1).isChecked = true
+                } else if (preferenceRailway == ProjectConstants.HARBOUR_RAILWAY) {
+                    binding.topAppBar.menu.getItem(2).isChecked = true
+                } else {
+                    binding.topAppBar.menu.getItem(0).isChecked = true
+                }
+                val fullForm =
+                    if (preferenceRailway == ProjectConstants.WESTERN_RAILWAY) resources.getString(R.string.western_railway)
+                    else if (preferenceRailway == ProjectConstants.CENTRAL_RAILWAY) resources.getString(
+                        R.string.central_railway
+                    )
+                    else resources.getString(R.string.harbour_railway)
+                binding.topAppBar.subtitle = fullForm
+                binding.navigationView.getHeaderView(0)
+                    .findViewById<TextView>(R.id.railwayType).text =
+                    fullForm
+                FirestoreFunctions.getStations(
+                    requireContext(),
+                    preferenceRailway,
+                    viewModel.updateStationList
+                )
+
+            })
 
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             binding.progressBar.visibility = View.VISIBLE
+            var railway = ProjectConstants.HARBOUR_RAILWAY
             if (menuItem.itemId == R.id.central_railway || menuItem.itemId == R.id.western_railway || menuItem.itemId == R.id.harbour_railway) {
                 if (menuItem.itemId == R.id.central_railway) {
-                    viewModel.setRailwayType(ProjectConstants.CENTRAL_RAILWAY)
+                    railway = ProjectConstants.CENTRAL_RAILWAY
                 } else if (menuItem.itemId == R.id.western_railway) {
-                    viewModel.setRailwayType(ProjectConstants.WESTERN_RAILWAY)
+                    railway = ProjectConstants.WESTERN_RAILWAY
                 } else {
-                    viewModel.setRailwayType(ProjectConstants.HARBOUR_RAILWAY)
+                    railway = ProjectConstants.HARBOUR_RAILWAY
                 }
                 lifecycleScope.launch {
-                    preferenceRailwayType.saveLayoutPrefrence(requireContext(),viewModel.railwayType.value?: ProjectConstants.WESTERN_RAILWAY)
+                    preferenceRailwayType.saveLayoutPrefrence(
+                        requireContext(),
+                        railway
+                    )
                 }
                 menuItem.isChecked = true
                 return@setOnMenuItemClickListener true
@@ -127,17 +145,6 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
             }
 
         }
-
-        viewModel.railwayType.observe(viewLifecycleOwner, Observer {
-            val fullForm =
-                if (it == ProjectConstants.WESTERN_RAILWAY) resources.getString(R.string.western_railway)
-                else if (it == ProjectConstants.CENTRAL_RAILWAY) resources.getString(R.string.central_railway)
-                else resources.getString(R.string.harbour_railway)
-            binding.topAppBar.subtitle = fullForm
-            binding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.railwayType).text =
-                fullForm
-            FirestoreFunctions.getStations(requireContext(), it, viewModel.updateStationList)
-        })
 
         binding.topAppBar.setNavigationOnClickListener {
             binding.drawerLayout.open()
@@ -215,7 +222,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(mMap: GoogleMap) {
         Log.d(TAG, "onMapReady called ${mMap}")
-        binding.progressBar.visibility=View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
 
         viewModel.userLocation.observe(viewLifecycleOwner, Observer {
             if (viewModel.stationsList.value != null) {

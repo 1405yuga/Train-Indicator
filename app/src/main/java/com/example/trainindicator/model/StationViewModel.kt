@@ -24,13 +24,6 @@ class StationViewModel : ViewModel() {
         this._userLocation.value = userLocation
     }
 
-    private val _railwayType = MutableLiveData(ProjectConstants.WESTERN_RAILWAY)
-    val railwayType: LiveData<String> = _railwayType
-
-    fun setRailwayType(railwayType: String) {
-        this._railwayType.value = railwayType
-    }
-
     val nearestStations = MutableLiveData<Pair<DocumentSnapshot?, DocumentSnapshot?>>()
 
     private var _stationsList = MutableLiveData(listOf<DocumentSnapshot>())
