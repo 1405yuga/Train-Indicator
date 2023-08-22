@@ -58,6 +58,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
             LocationServices.getFusedLocationProviderClient(requireContext())
         viewModel = ViewModelProvider(requireActivity()).get(StationViewModel::class.java)
         binding = FragmentDisplayStationsBinding.inflate(inflater, container, false)
+        binding.progressBar.visibility= View.VISIBLE
 
         checkLocationPermission()
         mapInitializer(savedInstanceState)
@@ -68,6 +69,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         })
 
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            binding.progressBar.visibility = View.VISIBLE
             if (menuItem.itemId == R.id.central_railway || menuItem.itemId == R.id.western_railway || menuItem.itemId == R.id.harbour_railway) {
                 if (menuItem.itemId == R.id.central_railway) {
                     viewModel.setRailwayType(ProjectConstants.CENTRAL_RAILWAY)
@@ -230,6 +232,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                     addStationMarker(mMap, doc)
                 }
             }
+            binding.progressBar.visibility = View.GONE
         })
 
         binding.navigationView.getHeaderView(0).apply {
