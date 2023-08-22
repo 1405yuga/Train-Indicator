@@ -17,10 +17,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.trainindicator.constants.ProjectConstants
 import com.example.trainindicator.databinding.FragmentDisplayStationsBinding
+import com.example.trainindicator.datastore.PreferenceRailwayType
 import com.example.trainindicator.firebase.FirestoreFunctions
 import com.example.trainindicator.mapLocation.MapFunctions
 import com.example.trainindicator.model.Station
@@ -35,6 +38,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.DocumentSnapshot
+import kotlinx.coroutines.launch
 
 private const val TAG = "DisplayStationsFragment tag"
 
@@ -43,6 +47,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentDisplayStationsBinding
     private lateinit var viewModel: StationViewModel
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var preferenceRailwayType: PreferenceRailwayType
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +62,11 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         checkLocationPermission()
         mapInitializer(savedInstanceState)
 
+        preferenceRailwayType = PreferenceRailwayType(requireContext())
+        preferenceRailwayType.preferences.asLiveData().observe(viewLifecycleOwner, Observer {
+            viewModel.setRailwayType(it)
+        })
+
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             if (menuItem.itemId == R.id.central_railway || menuItem.itemId == R.id.western_railway || menuItem.itemId == R.id.harbour_railway) {
                 if (menuItem.itemId == R.id.central_railway) {
@@ -65,6 +75,9 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                     viewModel.setRailwayType(ProjectConstants.WESTERN_RAILWAY)
                 } else {
                     viewModel.setRailwayType(ProjectConstants.HARBOUR_RAILWAY)
+                }
+                lifecycleScope.launch {
+                    preferenceRailwayType.saveLayoutPrefrence(requireContext(),viewModel.railwayType.value?: ProjectConstants.WESTERN_RAILWAY)
                 }
                 menuItem.isChecked = true
                 return@setOnMenuItemClickListener true
