@@ -27,21 +27,4 @@ object FirestoreFunctions {
             }
     }
 
-    fun getRoutes(context: Context,railwayType: String,stationCode : String){
-        val firestore = FirebaseFirestore.getInstance()
-        firestore.collection(railwayType)
-            .document(stationCode)
-            .collection(ProjectConstants.ROUTES)
-            .get()
-            .addOnSuccessListener {
-                Log.d(TAG, "routes are : ${it.documents}")
-                for(doc in it.documents){
-                    Log.d(TAG,"${doc.get(ProjectConstants.FAST)}")
-                }
-            }
-            .addOnFailureListener {
-                Toast.makeText(context, "Failed to get routes", Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "getStations error : ${it.message}")
-            }
-    }
 }

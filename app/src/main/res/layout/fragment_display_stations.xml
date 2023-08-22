@@ -32,6 +32,7 @@
                 app:title="@string/app_name"
                 app:titleCentered="true" />
         </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -41,10 +42,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="Map with Mumbai local railway stations are displayed."
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appbar" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appbar"
+                app:layout_constraintBaseline_toBottomOf="parent"/>
 
             <ProgressBar
                 android:id="@+id/progress_bar"
@@ -53,8 +54,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mapView"
-                android:visibility="gone"/>
+                app:layout_constraintTop_toTopOf="@+id/mapView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

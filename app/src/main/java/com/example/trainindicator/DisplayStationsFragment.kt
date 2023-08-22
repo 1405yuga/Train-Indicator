@@ -64,8 +64,18 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
         mapInitializer(savedInstanceState)
 
         preferenceRailwayType = PreferenceRailwayType(requireContext())
-        preferenceRailwayType.preferences.asLiveData().observe(viewLifecycleOwner, Observer {
-            viewModel.setRailwayType(it)
+        preferenceRailwayType.preferences.asLiveData().observe(viewLifecycleOwner, Observer { preferenceRailway ->
+            viewModel.setRailwayType(preferenceRailway)
+            if(preferenceRailway == ProjectConstants.CENTRAL_RAILWAY){
+                binding.topAppBar.menu.getItem(1).isChecked = true
+            }
+            else if(preferenceRailway == ProjectConstants.HARBOUR_RAILWAY){
+                binding.topAppBar.menu.getItem(2).isChecked = true
+            }
+            else{
+                binding.topAppBar.menu.getItem(0).isChecked = true
+            }
+
         })
 
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
@@ -205,6 +215,7 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(mMap: GoogleMap) {
         Log.d(TAG, "onMapReady called ${mMap}")
+        binding.progressBar.visibility=View.VISIBLE
 
         viewModel.userLocation.observe(viewLifecycleOwner, Observer {
             if (viewModel.stationsList.value != null) {
