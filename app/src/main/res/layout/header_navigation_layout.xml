@@ -6,159 +6,154 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:layout_marginStart="@dimen/header_margin"
+        android:layout_marginEnd="@dimen/header_margin"
+        android:layout_marginTop="@dimen/header_margin"
+        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        android:textColor="?attr/colorOnSurface" />
+
+    <TextView
+        android:id="@+id/railwayType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/western_railway"
+        android:layout_marginStart="@dimen/header_margin"
+        android:layout_marginEnd="@dimen/header_margin"
+        android:layout_marginBottom="@dimen/header_margin"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
+        android:textColor="?attr/colorOnSurfaceVariant" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp">
+        app:cardCornerRadius="4dp"
+        android:layout_marginStart="@dimen/header_margin"
+        android:layout_marginEnd="@dimen/header_margin">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"
-            android:gravity="bottom"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="4dp"
+            android:paddingVertical="2dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                android:textColor="?attr/colorOnSurface" />
+                android:layout_marginVertical="3dp"
+                android:text="@string/you_are_here"
+                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceTitleSmall"/>
 
-            <TextView
-                android:id="@+id/railwayType"
+            <LinearLayout
+                android:id="@+id/user_location_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:textAppearance="?attr/textAppearanceTitleSmall"
-                android:textColor="?attr/colorOnSurfaceVariant"
-                android:text="@string/western_railway" />
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
+                android:orientation="horizontal"
+                android:padding="4dp">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="6dp"
-                app:cardCornerRadius="4dp">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/current_location"
+                    android:src="@drawable/user_maker" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/user_location"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="2dp"
-                    android:orientation="vertical">
+                    android:layout_marginVertical="3dp"
+                    android:layout_weight="1"
+                    android:text="@string/not_found"
+                    android:textAppearance="?attr/textAppearanceTitleSmall"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="3dp"
-                        android:text="@string/you_are_here"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:id="@+id/user_location_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="4dp"
-                        android:layout_marginVertical="2dp"
-                        android:orientation="horizontal"
-                        android:padding="4dp">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:contentDescription="@string/current_location"
-                            android:src="@drawable/user_maker" />
-
-                        <TextView
-                            android:id="@+id/user_location"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="3dp"
-                            android:layout_weight="1"
-                            android:text="@string/not_found" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                app:cardCornerRadius="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="2dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="3dp"
-                        android:text="@string/nearest_station"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:id="@+id/nearest_fast_st_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="4dp"
-                        android:layout_marginVertical="2dp"
-                        android:orientation="horizontal"
-                        android:padding="4dp">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:contentDescription="@string/nearest_fast_station"
-                            android:src="@drawable/blue_marker" />
-
-                        <TextView
-                            android:id="@+id/nearest_fast_st"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="3dp"
-                            android:layout_weight="1"
-                            android:text="@string/not_found" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/nearest_slow_st_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="4dp"
-                        android:layout_marginVertical="2dp"
-                        android:orientation="horizontal"
-                        android:padding="4dp">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:contentDescription="@string/nearest_slow_station"
-                            android:src="@drawable/red_marker" />
-
-                        <TextView
-                            android:id="@+id/nearest_slow_st"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="3dp"
-                            android:layout_weight="1"
-                            android:text="@string/not_found" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
+            </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="4dp"
+        android:layout_marginStart="@dimen/header_margin"
+        android:layout_marginEnd="@dimen/header_margin"
+        android:layout_marginVertical="4dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="4dp"
+            android:paddingVertical="2dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="3dp"
+                android:text="@string/nearest_station"
+                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceTitleSmall"/>
+
+            <LinearLayout
+                android:id="@+id/nearest_fast_st_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
+                android:orientation="horizontal"
+                android:padding="4dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/nearest_fast_station"
+                    android:src="@drawable/blue_marker" />
+
+                <TextView
+                    android:id="@+id/nearest_fast_st"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="3dp"
+                    android:layout_weight="1"
+                    android:text="@string/not_found"
+                    android:textAppearance="?attr/textAppearanceTitleSmall"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/nearest_slow_st_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="2dp"
+                android:orientation="horizontal"
+                android:padding="4dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/nearest_slow_station"
+                    android:src="@drawable/red_marker" />
+
+                <TextView
+                    android:id="@+id/nearest_slow_st"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="3dp"
+                    android:layout_weight="1"
+                    android:text="@string/not_found"
+                    android:textAppearance="?attr/textAppearanceTitleSmall"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
