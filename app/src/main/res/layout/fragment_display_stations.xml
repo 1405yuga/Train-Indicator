@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:openDrawer="start">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -22,14 +24,14 @@
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
+                style="@style/Widget.Material3.Toolbar.OnSurface"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/menu_railway_type"
                 app:navigationIcon="@drawable/baseline_menu_24"
                 app:subtitleCentered="true"
                 app:title="@string/app_name"
-                app:titleCentered="true"
-                style="@style/Widget.Material3.Toolbar.OnSurface"/>
+                app:titleCentered="true" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,6 +63,7 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
+        style="?attr/navigationViewStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"

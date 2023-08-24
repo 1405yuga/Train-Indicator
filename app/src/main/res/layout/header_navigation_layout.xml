@@ -155,5 +155,12 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/header_margin"
+        app:dividerInsetStart="@dimen/header_margin"
+        app:dividerInsetEnd="@dimen/header_margin"
+        app:dividerColor="@color/md_theme_light_outlineVariant"/>
 
 </LinearLayout>
