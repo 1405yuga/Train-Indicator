@@ -9,10 +9,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
         android:layout_marginStart="@dimen/header_margin"
-        android:layout_marginEnd="@dimen/header_margin"
         android:layout_marginTop="@dimen/header_margin"
+        android:layout_marginEnd="@dimen/header_margin"
+        android:text="@string/app_name"
         android:textAppearance="?attr/textAppearanceHeadlineMedium"
         android:textColor="?attr/colorOnSurface" />
 
@@ -20,19 +20,19 @@
         android:id="@+id/railwayType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/western_railway"
         android:layout_marginStart="@dimen/header_margin"
         android:layout_marginEnd="@dimen/header_margin"
         android:layout_marginBottom="@dimen/header_margin"
+        android:text="@string/western_railway"
         android:textAppearance="?attr/textAppearanceTitleMedium"
         android:textColor="?attr/colorOnSurfaceVariant" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="4dp"
         android:layout_marginStart="@dimen/header_margin"
-        android:layout_marginEnd="@dimen/header_margin">
+        android:layout_marginEnd="@dimen/header_margin"
+        app:cardCornerRadius="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,8 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="3dp"
                 android:text="@string/you_are_here"
-                android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceTitleSmall"/>
+                android:textAppearance="?attr/textAppearanceTitleSmall"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/user_location_layout"
@@ -71,7 +71,7 @@
                     android:layout_marginVertical="3dp"
                     android:layout_weight="1"
                     android:text="@string/not_found"
-                    android:textAppearance="?attr/textAppearanceTitleSmall"/>
+                    android:textAppearance="?attr/textAppearanceTitleSmall" />
 
             </LinearLayout>
         </LinearLayout>
@@ -81,10 +81,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="4dp"
+        android:layout_marginVertical="4dp"
         android:layout_marginStart="@dimen/header_margin"
         android:layout_marginEnd="@dimen/header_margin"
-        android:layout_marginVertical="4dp">
+        app:cardCornerRadius="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,8 +98,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="3dp"
                 android:text="@string/nearest_station"
-                android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceTitleSmall"/>
+                android:textAppearance="?attr/textAppearanceTitleSmall"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/nearest_fast_st_layout"
@@ -123,7 +123,7 @@
                     android:layout_marginVertical="3dp"
                     android:layout_weight="1"
                     android:text="@string/not_found"
-                    android:textAppearance="?attr/textAppearanceTitleSmall"/>
+                    android:textAppearance="?attr/textAppearanceTitleSmall" />
 
             </LinearLayout>
 
@@ -149,18 +149,19 @@
                     android:layout_marginVertical="3dp"
                     android:layout_weight="1"
                     android:text="@string/not_found"
-                    android:textAppearance="?attr/textAppearanceTitleSmall"/>
+                    android:textAppearance="?attr/textAppearanceTitleSmall" />
 
             </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/header_margin"
-        app:dividerInsetStart="@dimen/header_margin"
+        app:dividerColor="@color/md_theme_light_outlineVariant"
         app:dividerInsetEnd="@dimen/header_margin"
-        app:dividerColor="@color/md_theme_light_outlineVariant"/>
+        app:dividerInsetStart="@dimen/header_margin" />
 
 </LinearLayout>
