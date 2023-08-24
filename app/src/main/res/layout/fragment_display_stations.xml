@@ -27,7 +27,8 @@
                 app:navigationIcon="@drawable/baseline_menu_24"
                 app:subtitleCentered="true"
                 app:title="@string/app_name"
-                app:titleCentered="true"/>
+                app:titleCentered="true"
+                style="@style/Widget.Material3.Toolbar.OnSurface"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,7 +53,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mapView" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
