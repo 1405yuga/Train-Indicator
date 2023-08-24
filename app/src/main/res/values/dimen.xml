@@ -5,4 +5,5 @@
     <dimen name="app_guide_horizontal_margin">8dp</dimen>
     <dimen name="app_guide_vertical_margin">2dp</dimen>
     <dimen name="app_guide_padding">4dp</dimen>
+    <dimen name="app_guide_icon">24dp</dimen>
 </resources>
