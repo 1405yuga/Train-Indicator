@@ -7,11 +7,11 @@
         android:title="@string/app_guide" />
     <item
         android:id="@+id/help"
-        android:icon="@drawable/help_"
+        android:icon="@drawable/help"
         android:title="@string/help" />
     <item
         android:id="@+id/exit_app"
-        android:icon="@drawable/exit_"
+        android:icon="@drawable/exit"
         android:title="@string/exit" />
 
 </menu>
