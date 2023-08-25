@@ -10,10 +10,15 @@ import android.graphics.Typeface
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.trainindicator.R
 import com.example.trainindicator.constants.ProjectConstants
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.DocumentSnapshot
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+private const val TAG = "StationViewModel tag"
 
 class StationViewModel : ViewModel() {
 
@@ -22,6 +27,18 @@ class StationViewModel : ViewModel() {
 
     fun setUserLocation(userLocation: LatLng) {
         this._userLocation.value = userLocation
+    }
+
+    private val _userLocality = MutableLiveData(ProjectConstants.NOT_FOUND)
+    val userLocality: LiveData<String> = _userLocality
+
+    val setUserLocality: (String) -> (Unit) = {
+        //live data works on main thread
+        viewModelScope.launch(Dispatchers.IO) {
+            //asynchronous assigning of value
+            _userLocality.postValue(it)
+        }
+
     }
 
     val nearestStations = MutableLiveData<Pair<DocumentSnapshot?, DocumentSnapshot?>>()
