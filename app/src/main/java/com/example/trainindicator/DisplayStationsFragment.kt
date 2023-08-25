@@ -89,12 +89,11 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                     preferenceRailway,
                     viewModel.updateStationList
                 )
-
             })
 
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             binding.progressBar.visibility = View.VISIBLE
-            var railway = ProjectConstants.HARBOUR_RAILWAY
+            var railway: String
             if (menuItem.itemId == R.id.central_railway || menuItem.itemId == R.id.western_railway || menuItem.itemId == R.id.harbour_railway) {
                 if (menuItem.itemId == R.id.central_railway) {
                     railway = ProjectConstants.CENTRAL_RAILWAY
@@ -153,10 +152,12 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
 
             binding.navigationView.getHeaderView(0).apply {
                 findViewById<TextView>(R.id.nearest_fast_st).text =
-                    pairOfNearestStations.second?.toObject(Station::class.java)?.name ?: "Not found"
+                    pairOfNearestStations.second?.toObject(Station::class.java)?.name
+                        ?: ProjectConstants.NOT_FOUND
 
                 findViewById<TextView>(R.id.nearest_slow_st).text =
-                    pairOfNearestStations.first?.toObject(Station::class.java)?.name ?: "Not found"
+                    pairOfNearestStations.first?.toObject(Station::class.java)?.name
+                        ?: ProjectConstants.NOT_FOUND
             }
         })
         return binding.root
@@ -229,11 +230,12 @@ class DisplayStationsFragment : Fragment(), OnMapReadyCallback {
                 viewModel.nearestStations.value =
                     MapFunctions.getNearestStation(it, viewModel.stationsList.value!!)
             }
-
-            binding.navigationView.getHeaderView(0)
-                .findViewById<TextView>(R.id.user_location).text =
-                MapFunctions.getLocality(it, requireContext())
+            MapFunctions.getLocality(it, requireContext(), viewModel.setUserLocality)
             addUserLocationMarker(mMap)
+        })
+        viewModel.userLocality.observe(viewLifecycleOwner, Observer {
+            binding.navigationView.getHeaderView(0)
+                .findViewById<TextView>(R.id.user_location).text = it
         })
 
         viewModel.stationsList.observe(viewLifecycleOwner, Observer {
