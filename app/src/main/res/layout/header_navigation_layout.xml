@@ -32,14 +32,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/header_margin"
         android:layout_marginEnd="@dimen/header_margin"
-        app:cardCornerRadius="4dp">
+        app:cardCornerRadius="@dimen/header_card_radius"
+        app:cardElevation="@dimen/header_card_radius">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="4dp"
-            android:paddingVertical="2dp">
+            android:paddingHorizontal="@dimen/header_card_horizontal_padding"
+            android:paddingVertical="@dimen/header_card_vertical_padding">
 
             <TextView
                 android:layout_width="match_parent"
@@ -81,17 +82,19 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="4dp"
+        android:layout_marginTop="@dimen/header_margin"
+        android:layout_marginBottom="4dp"
         android:layout_marginStart="@dimen/header_margin"
         android:layout_marginEnd="@dimen/header_margin"
-        app:cardCornerRadius="4dp">
+        app:cardCornerRadius="@dimen/header_card_radius"
+        app:cardElevation="@dimen/header_card_radius">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingHorizontal="4dp"
-            android:paddingVertical="2dp">
+            android:paddingHorizontal="@dimen/header_card_horizontal_padding"
+            android:paddingVertical="@dimen/header_card_vertical_padding">
 
             <TextView
                 android:layout_width="match_parent"

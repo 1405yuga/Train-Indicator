@@ -2,6 +2,9 @@
 <resources>
     <dimen name="header_margin">24dp</dimen>
     <dimen name="header_card_text_margin">12dp</dimen>
+    <dimen name="header_card_radius">4dp</dimen>
+    <dimen name="header_card_horizontal_padding">8dp</dimen>
+    <dimen name="header_card_vertical_padding">2dp</dimen>
     <dimen name="app_guide_horizontal_margin">8dp</dimen>
     <dimen name="app_guide_vertical_margin">2dp</dimen>
     <dimen name="app_guide_padding">4dp</dimen>
