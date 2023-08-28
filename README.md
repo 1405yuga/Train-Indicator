@@ -16,7 +16,9 @@ Upon installing the aforementioned app, two permissions are essential ie. Locati
 
 <b>Internet Connection (compulsory):</b> An internet connection is required to retrieve the list of Mumbai local train stations from the Firestore database. This ensures that the app has access to the latest and accurate information about the stations.
 
-<!-- TODO: ss -->
+<img src="https://github.com/1405yuga/Train-Indicator/assets/82303711/20aec4da-ba15-4d7e-842a-10a8f800ce79" width="350" height="700">
+
+<img src="https://github.com/1405yuga/Train-Indicator/assets/82303711/78ac6d83-0b5a-493a-8c2b-e2fa828875ba"  width="350" height="700">
 
 ### Display Stations :
 `Display Station` is a screen where Mumbai local train stations are showcased on a map, each marked with specific icons representing their station status (Slow or Fast station). On each marker station code is written to get the station name in one glance.
@@ -25,33 +27,38 @@ Upon installing the aforementioned app, two permissions are essential ie. Locati
 
 Simultaneously, the user's location is pinpointed using a marker on the map. This setup offers a visual guide for users to identify stations based on their railway lines and effectively locate their own position within the Mumbai train network. User location is pointed by <img src="https://github.com/1405yuga/Train-Indicator/assets/82303711/dd575b8a-9150-4bb9-8433-e5008181efca" width="25" height="25">
 
-<!-- TODO: ss -->
+<img src="https://github.com/1405yuga/Train-Indicator/assets/82303711/f170f930-fb9c-4c5d-a276-40cbe3bae9a4" width="350" height="700">
 
 ### Change Railway Line :
 The Mumbai local train system consists of three primary railway lines: Western Railway, Central Railway, and Harbour Railway. Users can switch between these lines by clicking on the three dots located in the top-right corner of the app. This feature empowers users to easily toggle between different railway lines, enabling them to access information relevant to their chosen route within the Mumbai local train network.The selected railway line is stored as the user's preference. Even after completely closing and reopening the app, the Display screen will show the stations of the last chosen railway line. This feature provides continuity in user experience by retaining the user's chosen settings.
 
-<!-- TODO: ss -->
+<img src="https://github.com/1405yuga/Train-Indicator/assets/82303711/bc0822f1-b4d9-403a-b16f-ffd13d831595" width="350" height="700">
 
 ### Navigation View : 
 The Navigation View can be accessed through the three-dashed icon in the app's top-left corner. This drawer offers user-centric options, including current location, nearest station details (both slow and fast) and also includes different menus like an app guide, help resources, and an exit option. This feature enhances user interaction and provides easy access to important app functionalities.
-<!-- TODO: ss -->
+
+<img src="https://github.com/1405yuga/Train-Indicator/assets/82303711/1a12f9f6-00ca-462e-9fa9-be4de78a63cd" width="350" height="700">
 
 ### Nearest Station :
 The app offers a `Nearest Station` feature that reveals the closest station based on the selected railway line. This includes both the nearest slow and fast stations. To access this, users should click on the three-dash icon located in the top left corner of the app. The navigation view displays the user's current location, along with details about the nearest slow and fast stations.
-<!-- TODO: ss navigation view -->
+
+<img src="https://github.com/1405yuga/Train-Indicator/assets/82303711/274f98b5-6101-4b27-bcac-3b2928fa55f0" width="350" height="400">
 
 By clicking on any of these station names, users can view the station name and marker on the 'Display Station` screen. This streamlined feature expedites the station selection process, aiding users in making quick decisions about the right station to choose. To enable this functionality, users need to grant location access, ensuring accurate and timely information.
 
-<!-- TODO: ss zoomed nearest station-->
+<img src="https://github.com/1405yuga/Train-Indicator/assets/82303711/ff9836fd-ff0e-4574-aa20-d6f10544c62c" width="350" height="700">
+
+<img src="https://github.com/1405yuga/Train-Indicator/assets/82303711/5d0c55d9-0a4d-4f06-8f5a-9228494e2988" width="350" height="700">
 
 ### App Guide : 
 The `App Guide` feature within the app showcases markers and symbols used throughout the interface, along with their respective meanings. This guide serves to explain the visual cues utilized within the app to users. By providing clear explanations for these markers and symbols, users can better understand the app's visual language, improving their overall navigation and usage experience.
 
-<!-- TODO: ss -->
+<img src="https://github.com/1405yuga/Train-Indicator/assets/82303711/55789393-006f-4b6e-9e3a-19d658fa7fbe" width="350" height="700">
 
 ### Help :
 The `Help` menu option within the app guides users to the app's documentation page. This documentation page provides comprehensive instructions and guidance on how to effectively utilize the app's features and functionalities. This resource assists users in getting the most out of the app and ensures a smoother user experience.
-<!-- TODO: ss -->
+
+<img src="https://github.com/1405yuga/Train-Indicator/assets/82303711/65603b9a-fc36-425f-affc-0906c2ae06c7" width="350" height="700">
 
 ### Exit :
 The `Exit` menu option serves to close the app. Users can select this option to exit and close the application completely.
